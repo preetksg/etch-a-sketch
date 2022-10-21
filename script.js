@@ -1,14 +1,15 @@
 const container = document.querySelector('.container');
 
 // Add 16 divs
-for (let i = 0; i < 256; i++) {
-  const div = document.createElement('div');
-  div.style.cssText = "border: 1px solid black; height: 25px; width: 25px";  
 
-  div.classList.add('grid-item');
-  container.appendChild(div);
+function createGrid(squares) {
+    for (let i = 0; i < (squares*squares); i++) {
+        const div = document.createElement('div');
+        div.classList.add('grid-item');
+        container.appendChild(div);
+    }
+    hoverColor();
 }
-hoverColor();
 
 function hoverColor () {
     let items = document.querySelectorAll('.grid-item');
@@ -18,3 +19,15 @@ function hoverColor () {
       });
     });
   }
+
+  function input () {
+    let squares = prompt("Enter number of squares on each side");
+    return squares;
+  }
+
+  const btn1 = document.getElementById('btn1');
+  btn1.addEventListener('click', () => {
+    let squares = input();
+    createGrid(squares);
+    container.style.gridTemplateColumns="repeat("+squares+",auto [col-start])";
+} )
